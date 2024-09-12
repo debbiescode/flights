@@ -1,0 +1,9 @@
+# Predicting the next time step
+last_sequence = scaled_data[-sequence_length:]
+last_sequence = np.expand_dims(last_sequence, axis=0)
+
+# Predict passengers
+predicted_passengers_scaled = model.predict(last_sequence)
+predicted_passengers = scaler.inverse_transform([[0, 0, predicted_passengers_scaled[0][0]]])[-1][-1]
+
+print(f"Estimated passengers in the air at 2 PM PST: {predicted_passengers:.0f}")
